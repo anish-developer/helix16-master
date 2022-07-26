@@ -32,6 +32,7 @@ useEffect(() => {
         try {
             const JobStatus = await axios.post(`https://helix12.herokuapp.com/helix/job/spec/email/${email}`)
             setStatusJob(JobStatus.data)
+            console.log(JobStatus.data)
 
         } catch (error) {
             console.log(error)

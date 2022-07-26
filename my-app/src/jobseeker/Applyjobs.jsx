@@ -58,7 +58,7 @@ const ApplyJobs = () => {
     <div className="container-fluid">
         <div className="row">
             <div className="col-lg-6 col-12">
-<img src={`${process.env.PUBLIC_URL}/gra.svg`} className='mk'/>
+<img src={`.${process.env.PUBLIC_URL}/gra.svg`} className='mk' alt='nothing'/>
             </div>
             <div className="col-lg-6 col-12">
                <div className="masre">
@@ -75,8 +75,8 @@ const ApplyJobs = () => {
                 <label htmlFor="file" className='moya'>Resume Upload</label>
                 <input type="file" name='file' className='h' onChange={onFileChange}required id='name' />
                 {Cookies.get('jemail')?
-                <button className='gg' onClick={(e)=>onFormSubmit(e)}>Submit</button> :
-                <button className='gg' onClick={()=>clickOne()}>Submit</button>
+                <button className='gg' style={{marginTop:'10px'}} onClick={(e)=>onFormSubmit(e)}>Submit</button> :
+                <button className='gg' style={{marginTop:'10px'}} onClick={()=>clickOne()}>Submit</button>
             }
                </div>
             </div>

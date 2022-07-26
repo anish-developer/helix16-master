@@ -13,7 +13,7 @@ const Nav = () => {
             <div className="col-lg-12">
                 <div className="header-inner">
                     <div className="logo">
-                        <a href="index.html">
+                        <a href="/helix">
                             <img src={`${process.env.PUBLIC_URL}/images/logo/logo.png`} alt="logo secondary dark"/>
                         </a>
                     </div>

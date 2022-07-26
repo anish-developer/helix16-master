@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-// import { Navigate, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
 
 const JLogin = () => {
-  
+  const navigate = useNavigate()
   const [login, setLogin] = useState({
     "email":"",
     "password":""
@@ -27,9 +27,9 @@ const JLogin = () => {
         if(data.data === true){
           // alert('login successful')
           swal("login successful",'', "success");
-          window.location.reload();
+          // window.location.reload();
           Cookies.set('jemail',login.email,{expires:1})
-          // navigate('/')
+          navigate('/helix/')
           setLogin({email:"",password:""})
       }
       else{

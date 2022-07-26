@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import Home from './Home';
 import About_us from './About_us';
 import Footer from './Footer';
@@ -40,13 +40,14 @@ import ShowJobApplys from './admin/ShowJobApplys';
 import UpdateJobAppliers from './admin/UpdateJobAppliers';
 import Faq from './admin/Faq'
 import ContactForm from './admin/ContactForm';
+import AllLogin from './AllLogin'
 function App() {
   return (
    <>
-   <BrowserRouter>
+  
    <Routes>
 
-    <Route path='/helix/' element={<Home/>}></Route>
+    <Route  path='/helix/' element={<Home/>}></Route>
     <Route path='/helix/About_us' element={<About_us/>}></Route>
     <Route path='/helix/Footer' element={<Footer/>}></Route>
     <Route path='/helix/Place_Job_Order' element={<Place_Job_Order/>}></Route>
@@ -93,9 +94,10 @@ function App() {
 
     {/* jobSeeker */}
     {/* <Route path='/jobapply' element={<ProtectedJob Component={JobApply}/>}/> */}
+    <Route path='/helix/alllogin' element={<AllLogin/>}></Route>
    </Routes>
    
-   </BrowserRouter>
+  
   {/* <Home></Home> */}
    
    

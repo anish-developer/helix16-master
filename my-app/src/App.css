@@ -378,6 +378,11 @@ h2.jjfrfgdrhgcs {
     display: none;
   }
 }
+@media only screen and (max-width: 600px) {
+  .logo {
+    display: none;
+  }
+}
 .faq h2 {
   margin-top: 40px;
 }
@@ -1272,7 +1277,7 @@ body {
   margin-right: auto;
   max-width: 300px;
   width: 100%;
-  margin-top: -40px;
+  margin-top: -50px;
 }
  .testimonial .row .tabs li:nth-child(3) {
   align-self: flex-end;
@@ -1288,7 +1293,7 @@ body {
 }
  .testimonial .row .tabs li:nth-child(3) figure img {
   margin-left: auto;
-  margin-top: -33px;
+  margin-top: -50px;
 }
  .testimonial .row .tabs li:nth-child(3):focus {
   border: 10px solid red;
@@ -1429,6 +1434,7 @@ label.moya {
 }
 input#name {
   padding-top: 10px;
+
 }
 
 img.mk {
@@ -1436,15 +1442,16 @@ img.mk {
 }
 input#name {
   padding-top: 10px;
+  color: #000 !important;
 }
 
 img.mk {
   background-color: white;
 }
 
-input#name {
-  color: #0000008a  !important;
-}
+/* input#name {
+  color: #ffff !important;
+} */
 
 button.cr-btn.hfd {
   width: 13%;
@@ -1553,10 +1560,66 @@ button.hdgr {
 .ffdff {
   margin-top: 24px;
 }
-.fil {
-  height: 50px;
+p#jj {
+  text-align: justify;
 }
-button.gg {
-  margin-top: 12px;
-  border-radius: 7px;
+
+@media only screen and (max-width: 600px) {
+  button#pills-home-tab {
+margin-left: 10px;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  button#pills-profile-tab {
+margin-left: 10px;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  ul#pills-tab {
+align-items: center;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  b.hde {
+font-size: 18px !important;
+
+background-color: #f7931e !important;
+border-radius: 5px !important;
+padding: 10px !important;
+padding-left: 5px !important;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #pills-tab  {
+margin-left: 30px !important;
+
+  }
+}
+@media only screen and (max-width: 600px) {
+  .section-title h2.title {
+ margin-top: 0px !important;
+ font-size: 40px !important;
+
+  }
+}
+
+.modal-backdrop.fade.show {
+  position: absolute;
+  z-index: 1;
+  width: 0% !important;
+  float: left !important;
+}
+
+body.modal-open {
+  position: relative;
+  z-index: 1;
+  overflow: overlay !important
 }

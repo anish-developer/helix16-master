@@ -41,7 +41,7 @@ const JobApply = () => {
     },[])
     const clickOne = ()=>{
         // swal("login first");
-        swal("login first", "You have must Login!", "error");
+        swal("Sign In first", "You have must Login!", "error");
 
        }
 

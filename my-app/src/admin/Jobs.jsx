@@ -47,7 +47,7 @@ const acceptJob= async (_id)  =>{
 
 const data = () =>{
     setTimeout(() => {
-        window.location.reload()
+        // window.location.reload()
     }, 1000);
 }
 // const refreshPage = () =>{

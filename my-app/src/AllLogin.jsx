@@ -36,11 +36,11 @@ const Login = () => {
                 }
                 else if(data.data === false){
                     // alert('')
-                    swal("email is not registerd",'', "error");
+                    await swal("email is not registerd", '', "error");
                 }
                 else{
                     // alert(data.data)
-                    swal(data.data,'', "error");
+                    await swal(data.data, '', "error");
                 }
             }
             loginEmp()
@@ -69,7 +69,7 @@ const Login = () => {
 //   });
   return (
     <form action="" onSubmit={SubmitForm}>   
-    <div className="modal fade" id="login" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+    <div className="modal fade" id="login" tabIndex="-1" aria-labelledby="applyNow" aria-hidden="true">
    <div className="modal-dialog modal-dialog-centered">
       <div className="modal-content">
          <div className="modal-body p-5">

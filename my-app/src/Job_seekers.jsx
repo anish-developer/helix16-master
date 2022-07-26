@@ -1,21 +1,25 @@
 import React,{useState,useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Footer from './Footer'
 import JLogin from './jobseeker/JLogin'
 // import Nav from './Nav'
 import JobApply from './jobseeker/JobApply'
 import JRegister from './jobseeker/JRegister'
 import Cookies from 'js-cookie'
+import swal from 'sweetalert'
 // import axios from 'axios'
 // import ApplyJobs from './jobseeker/Applyjobs'
+// import { useNavigate } from 'react-router-dom'
 
 const Job_seekers = () => {
 
     // console.log(props)
-    
+    const navigate = useNavigate()
    const signOut = () =>{
     Cookies.remove('jemail')
-    window.location.reload();
+    navigate('/helix')
+    swal('logout successfully','','success')
+    // window.location.reload();
    }
   
   
@@ -33,7 +37,7 @@ const Job_seekers = () => {
             <div className="col-lg-12">
                 <div className="header-inner">
                     <div className="logo">
-                        <a href="index.html">
+                        <a href="/helix">
                             <img src={`${process.env.PUBLIC_URL}/images/logo/logo.png`} alt="logo secondary dark"/>
                         </a>
                     </div>

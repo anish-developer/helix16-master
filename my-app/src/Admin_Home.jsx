@@ -43,6 +43,7 @@ const logout = () =>{
     // alert('logout successful')
     swal("logout successful!",'', "success");
     navigate('/helix/admin')
+    
 }
   return (
     <>
@@ -211,7 +212,7 @@ const logout = () =>{
                                     <td>{curElm.c_email}</td>
                                     <td>{curElm.c_description}</td>
 
-                                    <td><Link className="btn btn-sm btn-primary" style={{"borderRadius": "10px"}} to={`/UpdateEmp/${curElm._id}`}><FiEdit></FiEdit></Link>
+                                    <td><Link className="btn btn-sm btn-primary" style={{"borderRadius": "10px"}} to={`/helix/UpdateEmp/${curElm._id}`}><FiEdit></FiEdit></Link>
                                     {/* <a className="btn btn-sm btn-danger" href="" style={{"border-radius": "10px"}}>delete</a> */}
                                     </td>
                                 </tr>
@@ -260,7 +261,7 @@ const logout = () =>{
                                     <td>{curElm.j_email}</td>
                                     <td>{curElm.j_address}</td>
                                     {/* <td>{curElm.c_description}</td> */}
-                                    <td><Link className="btn btn-sm btn-primary" style={{"borderRadius": "10px"}} to={`/updateJob/${curElm._id}`}><FiEdit></FiEdit></Link><br /><br />
+                                    <td><Link className="btn btn-sm btn-primary" style={{"borderRadius": "10px"}} to={`/helix/updateJob/${curElm._id}`}><FiEdit></FiEdit></Link><br /><br />
                                    </td>
                                 </tr>
                                         </>

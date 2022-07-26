@@ -9,7 +9,7 @@ const ProtectedJob = (props) => {
     useEffect(()=>{
         let login = Cookies.get('admin')
         if(!login){
-            navigate('/helix/admin')
+            navigate('/helix')
         }
     },[Component])
   return (

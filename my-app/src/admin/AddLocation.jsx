@@ -36,7 +36,7 @@ const locationAdd = async (e) =>{
       const data = await axios.post(`https://helix12.herokuapp.com/helix/admin/location/add`,addLocation)
       // console.log(data)
       swal(data.data,'', "success");
-      window.location.reload();
+    //   window.location.reload();
     } catch (error) {
     //   alert('something wrong')
     swal('something wrong','', "error");
@@ -67,7 +67,7 @@ const AddCompnayType = async (e) =>{
     // console.log(data)
     // alert(data.data)
     swal(data.data,'', "success");
-    window.location.reload();
+    // window.location.reload();
   } catch (error) {
     // alert('something wrong')
     swal('something wrong','', "error");

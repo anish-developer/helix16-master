@@ -1,62 +1,76 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Cookies from 'js-cookie';
+import {useNavigate} from 'react-router-dom'
 // import Slider from "react-slick";
-// import Cookies from 'js-cookie'
+import axios from 'axios'
+
+import swal from 'sweetalert';
  const Home = () => {
-    // var settings = {
-       
-    //     infinite: false,
-    //     speed: 500,
-    //     slidesToShow: 2,
-    //     slidesToScroll: 2,
-    //     initialSlide: 0,
-    //     autoplay: true,
-    //   speed: 5000,
-    //   autoplaySpeed: 5000,
-    //   cssEase: "linear",
-    //     responsive: [
-    //       {
-    //         breakpoint: 1024,
-    //         settings: {
-    //           slidesToShow: 2,
-    //           slidesToScroll: 2,
-    //           infinite: true,
-    //           dots: true
-    //         }
-    //       },
-    //       {
-    //         breakpoint: 600,
-    //         settings: {
-    //           slidesToShow: 1,
-    //           slidesToScroll: 1,
-    //           initialSlide: 2
-    //         }
-    //       },
-    //       {
-    //         breakpoint: 480,
-    //         settings: {
-    //           slidesToShow: 1,
-    //           slidesToScroll: 1,
-    //         }
-    //       }
-    //     ]
-    //     }
-        // const [signOut, setsignOut] = useState('');
-    // const loginOut = () =>{
-    //     if(Cookies.get('jemail')){
-    //         Cookies.remove('jemail')
-    //         alert('logout successfully')
-    //         window.location.reload()
-    //     }
-    //     else{
-    //         Cookies.remove('email')
-    //         alert('logout successfully')
-    //         window.location.reload()
-    //     }
-    // }
+     const navigate = useNavigate()
+  const [empLogin,setEmpLogin] = useState({
+    "email":"",
+    "password":""
+  })
+  const signOut = () =>{
+    Cookies.remove('jemail')
+    navigate('/helix/Job_seekers')
+    swal('logout successfully','','success')
+    // window.location.reload();
+   }
+  const changesData = (e) =>{
+    setEmpLogin({
+        ...empLogin,[e.target.name]:e.target.value
+    })
+  }
+  useEffect(()=>{
+    if(Cookies.get('email')){
+        navigate('/helix/dashboardemp')
+    }
+  })
+       const SubmitForm =  (e) => {
+        e.preventDefault();
+        try {
+            const loginEmp = async() =>{
+                const data = await axios.post(`https://helix12.herokuapp.com/helix/login/checklogin`,empLogin)
+                console.log(data.data)
+                if(data.data === 'employer'){
+                    // alert('login successful')
+                    swal("login successful!",'', "success");
+                    Cookies.set('email',empLogin.email,{expires:1})
+                    navigate('/helix/dashboardemp')
+                    setEmpLogin({email:"",password:""})
+                    // window.location.reload()
+                }
+                else if(data.data === false){
+                    // alert('')
+                    swal("email is not registerd",'', "error");
+                }
+                else if(data.data === 'jobseeker'){
+                    swal("login successful!",'', "success");
+                    Cookies.set('jemail',empLogin.email,{expires:1})
+                    navigate('/helix/Job_seekers')
+                    setEmpLogin({email:"",password:""})
+                }
+                else if(data.data === 'admin'){
+                  Cookies.set('admin',empLogin.email,{expires:1})
+                    navigate("/helix/Admin_Home")
+                }
+                else{
+                    // alert(data.data)
+                    swal(data.data,'', "error");
+                }
+            }
+            loginEmp()
+        } catch (error) {
+            // console.log(error)
+            swal(error,'','error')
+        }
+      
+      };
+    
   return (
 <>
 <div class="wrapper sidemenu-wrapper" id="wrapper">
@@ -162,6 +176,18 @@ import Cookies from 'js-cookie';
                     <li>
                         <Link to="/helix/CONTACT_US">CONTACT US</Link>
                     </li>
+                    {
+                     Cookies.get('email') || Cookies.get('jemail') || Cookies.get('admin')?
+                     <a  data-bs-toggle="modal"  onClick={()=>signOut()}class="cr-btn cr-btn-round">
+                     
+                        Logout
+                     
+                 </a>
+                     :
+                    <a href="#login" data-bs-toggle="modal" class="cr-btn cr-btn-round">
+                            <span>Log In</span>
+                        </a>
+                    }
                 </ul>
             </nav>
             {/* {!Cookies.get('jemail') && !Cookies.get('email')?
@@ -209,6 +235,8 @@ import Cookies from 'js-cookie';
     </div>
 </aside>
 </div> 
+
+
 
 
 <div className='hsshshsh'>
@@ -383,7 +411,7 @@ import Cookies from 'js-cookie';
                             </h1>
                             <p id='jj'>We bring together skilled IT professionals in North America and businesses seeking tech-savvy experts. At Helix Tech, we understand how difficult it is on both sides of the coin: finding a job as an IT pro and finding talent as a company. We’re here to bridge that gap to help individuals and companies reach their goals
                             </p>
-                            <Link to="/About_us" class="cr-btn cr-btn-lg cr-btn-round">
+                            <Link to="/helix/About_us" class="cr-btn cr-btn-lg cr-btn-round">
                                 <span id='KONW'>Know More</span>
                             </Link>
                         </div>
@@ -451,7 +479,7 @@ import Cookies from 'js-cookie';
                                     <img src={`${process.env.PUBLIC_URL}/images/icons/feature-icon-3.png`} alt="feature icon"/>
                                 </span>
                                 <span>
-                                    <img src={`${process.env.PUBLIC_URL}/images/icons/feature-icon-3.png"`} alt="feature icon"/>
+                                    <img src={`${process.env.PUBLIC_URL}/images/icons/feature-icon-3.png`} alt="feature icon"/>
                                 </span>
                             </div>
                             <div class="service-content">
@@ -725,103 +753,40 @@ import Cookies from 'js-cookie';
     </div>
 
        
-        {/* <section id="portfoio-area" class="portfolio-area section-padding-lg">
-            
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12 offset-0">
-                        <div class="section-title text-center">
-                            <h6>ACHIEVEMENT WE FOUND</h6>
-                            <h2>Our Testimonial</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="testimonial-wrap testimonial-style-2 sidemenu-wrapper-testimonial-slider-active cr-slider-dots-1">
-
-                            
-                            <div class="testimonial text-center">
-                                <div class="testimonial-thumb">
-                                    <img src="images/22.png" alt="testimonial author"/>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="text-justifyuu">Working with Helix Tech was a refreshing experience. Before, my company struggled to find an IT professional that matched our needs. After describing the role we needed, Helix’s team was able to provide us with a perfect-fit candidate who has since become one of our most valuable assets. I highly recommend Helix Tech no matter the size or age of your business. It’s that valuable!</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <h6>Kristin Hans</h6>
-                                </div>
-                            </div>
-                             */}
-                            {/* <div class="testimonial text-center">
-                                <div class="testimonial-thumb">
-                                    <img src="images/22.png" alt="testimonial author"/>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="text-justify">Working with Helix Tech was a refreshing experience. Before, my company struggled to find an IT professional that matched our needs. After describing the role we needed, Helix’s team was able to provide us with a perfect-fit candidate who has since become one of our most valuable assets. I highly recommend Helix Tech no matter the size or age of your business. It’s that valuable!</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <h6>Kristin Hans</h6>
-                                </div>
-                            </div>
-                             */}
-                            {/* <div class="testimonial text-center">
-                                <div class="testimonial-thumb">
-                                    <img src="images/22.png" alt="testimonial author"/>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="text-justify">Working with Helix Tech was a refreshing experience. Before, my company struggled to find an IT professional that matched our needs. After describing the role we needed, Helix s team was able to provide us with a perfect-fit candidate who has since become one of our most valuable assets. I highly recommend Helix Tech no matter the size or age of your business. It s that valuable!</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <h6>Kristin Hans</h6>
-                                </div>
-                            </div> */}
-                           
-                            {/* <div class="testimonial text-center">
-                                <div class="testimonial-thumb">
-                                    <img src="images/22.png" alt="testimonial author"/>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="text-justify">Working with Helix Tech was a refreshing experience. Before, my company struggled to find an IT professional that matched our needs. After describing the role we needed, Helix s team was able to provide us with a perfect-fit candidate who has since become one of our most valuable assets. I highly recommend Helix Tech no matter the size or age of your business. It’s that valuable!</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <h6>Kristin Hans</h6>
-                                </div>
-                            </div> */}
-                           
-                            {/* <div class="testimonial text-center">
-                                <div class="testimonial-thumb">
-                                    <img src="images/22.png" alt="testimonial author"/>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="text-justify">Working with Helix Tech was a refreshing experience. Before, my company struggled to find an IT professional that matched our needs. After describing the role we needed, Helix’s team was able to provide us with a perfect-fit candidate who has since become one of our most valuable assets. I highly recommend Helix Tech no matter the size or age of your business. It’s that valuable!</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <h6>Kristin Hans</h6>
-                                </div>
-                            </div> */}
-                           
-                            {/* <div class="testimonial text-center">
-                                <div class="testimonial-thumb">
-                                    <img src="images/22.png" alt="testimonial author"/>
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="text-justify">Working with Helix Tech was a refreshing experience. Before, my company struggled to find an IT professional that matched our needs. After describing the role we needed, Helix’s team was able to provide us with a perfect-fit candidate who has since become one of our most valuable assets. I highly recommend Helix Tech no matter the size or age of your business. It’s that valuable!</p>
-                                </div>
-                                <div class="testimonial-author">
-                                    <h6>Kristin Hans</h6>
-                                </div>
-                            </div> */}
-                          
-
-                        {/* </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </section> */}
         
+        
+        <form action="" onSubmit={SubmitForm}>   
+    <div className="modal fade" id="login" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+   <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-content">
+         <div className="modal-body p-5">
+            <div className="text-center mb-4">
+               <h5 className="modal-title" id="staticBackdropLabel"></h5>
+            </div>
+            <div className="position-absolute end-0 top-0 p-3">
+               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           
+            <div className="mb-3">
+               <label htmlFor="email" className="form-label">Email Address</label>
+               <input type="email" className="form-control" value={empLogin.email} id="email" name='email' onChange={(e)=>changesData(e)} placeholder="Enter your email"/>
+            </div>
+            <div className="mb-3">
+               <label htmlFor="password" className="form-label">Password</label>
+               <input type="password" className="form-control" id="password" name='password' value={empLogin.password} onChange={(e)=>changesData(e)} placeholder="Enter password"/>
+            </div>
+            {/* <button type='submit'>
+            <a href="#login"  data-bs-toggle="modal" className="cr-btn cr-btn-sm">
+                       <span>Log In</span>
+                    </a>
+                    </button> */}
+                    {/* do not change this  */}
+                       <button type="submit">Submit</button>
+         </div>
+      </div>
+   </div>
+</div>
+</form>
         <section class="callto-action-area bg-theme">
             <div class="container">
                 <div class="row">

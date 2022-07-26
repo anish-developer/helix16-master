@@ -13,7 +13,7 @@ useEffect(()=>{
     async function getFormData(){
         try {
             const data = await axios.get("https://helix12.herokuapp.com/helix/contactform/form")
-            // console.log(EmployerData.data)
+            console.log(data.data)
             setForm(data.data)
         } catch (error) {
             console.log(error)
@@ -143,13 +143,13 @@ const logout = () =>{
                                         return(
                                         <>
                                         <tr key={curElm._id}>
-                                    <td>{curElm.c_name}</td>
+                                    <td>{curElm.name}</td>
                                     {/* <td>{curElm.c_type}</td> */}
-                                    <td>{curElm.c_address}</td>
-                                    <td>{curElm.c_person}</td>
-                                    <td>{curElm.c_number}</td>
-                                    <td>{curElm.c_email}</td>
-                                    <td>{curElm.c_description}</td>
+                                    {/* <td>{curElm.address}</td> */}
+                                    <td>{curElm.email}</td>
+                                    <td>{curElm.phone}</td>
+                                    <td>{curElm.subject}</td>
+                                    <td>{curElm.message}</td>
 {/* 
                                     <td><Link className="btn btn-sm btn-primary" style={{"borderRadius": "10px"}} to={`/UpdateEmp/${curElm._id}`}><FiEdit></FiEdit></Link> */}
                                     {/* <a className="btn btn-sm btn-danger" href="" style={{"border-radius": "10px"}}>delete</a> */}
