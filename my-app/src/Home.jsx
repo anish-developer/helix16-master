@@ -282,7 +282,18 @@ import swal from 'sweetalert';
                     <li>
                         <Link to="/helix/CONTACT_US">CONTACT US</Link>
                     </li>
-                    
+                    {
+                     Cookies.get('email') || Cookies.get('jemail') || Cookies.get('admin')?
+                     <a  data-bs-toggle="modal"  onClick={()=>signOut()}class="cr-btn cr-btn-round">
+                     
+                        Logout
+                     
+                 </a>
+                     :
+                    <a href="#login" data-bs-toggle="modal" class="cr-btn cr-btn-round">
+                            <span>Log In</span>
+                        </a>
+                    }
         {/* <li class="nav-item">
           <a class="nav-link disabled" href="/" tabindex="-1" aria-disabled="true">Disabled</a>
         </li> */}

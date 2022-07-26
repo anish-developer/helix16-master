@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import Cookies from 'js-cookie'
 import swal from 'sweetalert';
-import { error } from "jquery";
+// import { error } from "jquery";
 
 async function loginUser(credentials) {
 	return fetch('https://helix12.herokuapp.com/helix/admin/login', {

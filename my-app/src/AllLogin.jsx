@@ -15,11 +15,11 @@ const Login = () => {
         ...empLogin,[e.target.name]:e.target.value
     })
   }
-  useEffect(()=>{
-    if(Cookies.get('email')){
-        navigate('/helix/dashboardemp')
-    }
-  })
+  // useEffect(()=>{
+  //   if(Cookies.get('email')){
+  //       navigate('/helix/dashboardemp')
+  //   }
+  // })
        const SubmitForm =  (e) => {
         e.preventDefault();
         try {
